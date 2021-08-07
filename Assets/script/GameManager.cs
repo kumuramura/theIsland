@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public static int choosen = 0;//用来选择的
 
+    public static string scriptName= "0chapter";//设置当前的脚本名,在loadscript的读档中使用
+
     //public static int times = 1;//有什么用？
 
     private bool isActive = false;
@@ -34,7 +36,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        LoadScript.instance.loadscripts("0chapter");
+        GameManager.scriptName = "0chapter";
+        LoadScript.instance.loadscripts(GameManager.scriptName);
         handleData(LoadScript.instance.loadNext());
         for (int i = 1; i <= 30; i++)
         {
@@ -109,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     void Update() {
 
+        print(scriptName);
         //暂停使用，后续优先处理
         if(ClickDect.skipsituation==1)
         {

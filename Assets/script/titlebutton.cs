@@ -36,6 +36,7 @@ public class titlebutton : MonoBehaviour
     public void startGame()
     {
         SceneManager.LoadScene(1);
+        
     }
 
     //打开存档界面

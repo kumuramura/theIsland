@@ -5,6 +5,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoadScript : MonoBehaviour{
     public static LoadScript instance;
@@ -72,7 +73,12 @@ public class LoadScript : MonoBehaviour{
                 currentLog = loadAndSaveInTitle.currentLogInTitle;
                 index = loadAndSaveInTitle.index;
                 ChangeNameColor(currentLog.name);
+                //把聊天记录的内容删掉
+                RecordLog.historyLog.Clear();
+                //开始把存档中的save展示出来
+                LoadScript.instance.loadscripts(GameManager.scriptName);
                 
+
                 return currentLog;
             }
             //该部分else if 的作用是
@@ -185,7 +191,7 @@ public class LoadScript : MonoBehaviour{
                 //这里我们把index设置为后一位，是因为当前的jumpnumber的文案，已经被return了
                 //重写的目的也是改这里，不然没有重写的意义
                 index = jumpNumber+1;
-                //print(txt[jumpNumber]);
+                GameManager.scriptName = txtName;
                 //我们再手动把数据分一下
                 string[] newtxtdata = txt[jumpNumber].Split('#');//第jumpNumber个剧本，用#分开，放入datas数组
                 string ttype= newtxtdata[0];
@@ -199,9 +205,7 @@ public class LoadScript : MonoBehaviour{
                     
                 case "2":
                         return new ScriptData(2, newtxtdata[1], newtxtdata[2], newtxtdata[3]);
-                    
-               
-                    
+                                      
                 case "4":
                         return new ScriptData(4, newtxtdata[1], newtxtdata[2], newtxtdata[3], int.Parse(newtxtdata[4]));
                     default:
@@ -262,11 +266,12 @@ public class LoadScript : MonoBehaviour{
         save.JumpTo2 = currentLog.JumpTo2;
         save.afterJump = currentLog.afterJump;
         save.SaveTime=DateTime.Now.ToString();
+        save.scriptName = GameManager.scriptName;
 
         return save;
     }
 
-    public void SaveGame()
+    public void SaveGame()//没有引用是因为被游戏界面中的存档按钮使用
     {
         if (ClickDect.savingmode == 1)
         { 
@@ -289,9 +294,7 @@ public class LoadScript : MonoBehaviour{
             bf.Serialize(file, save);
             file.Close();
 
-            //index = 0;
-            //currentLog = null;
-            Debug.Log("Game Saved, index is " + index);
+            Debug.Log("Game has Saved, index is " + index+" , scriptName is "+save.scriptName);
         }
     }
 
@@ -314,18 +317,16 @@ public class LoadScript : MonoBehaviour{
                 file.Close();
                 
                 SaveCheck = true;
-
+                //把聊天记录的内容删掉
+                RecordLog.historyLog.Clear();
+                //开始把存档中的save展示出来
+                LoadScript.instance.loadscripts(save.scriptName);
+                GameManager.scriptName = save.scriptName;
                 index = save.index;
                 switch (save.type)
                 {
-                    case 0:
-                        currentLog = new ScriptData(save.type, save.backpic);
-                        break;
                     case 1:
                         currentLog = new ScriptData(save.type, save.name, save.log, save.picname, save.backpic);
-                        break;
-                    case 2:
-                        currentLog = new ScriptData(save.type, save.name, save.log, save.picname);
                         break;
                     case 3:
                         currentLog = new ScriptData(save.type, save.option1, save.option2, save.JumpTo1,
@@ -334,13 +335,11 @@ public class LoadScript : MonoBehaviour{
                     case 4:
                         currentLog = new ScriptData(save.type, save.name, save.log, save.picname);
                         break;
-                    case 5:
-                        currentLog = new ScriptData(save.type, save.backpic);
-                        break;
                 }
 
 
-                Debug.Log("Game Loaded, index is " + index);
+                Debug.Log("Game Loaded, index is " + index + " , scriptName is " + save.scriptName);
+                
 
 
             }

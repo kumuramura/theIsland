@@ -36,7 +36,7 @@ public class loadAndSaveInTitle : MonoBehaviour
 
     void Update()
     {
-        LoadGame();
+        //LoadGame();
     }
 
     public void LoadGame()
@@ -54,18 +54,13 @@ public class loadAndSaveInTitle : MonoBehaviour
                 Save save = (Save)bf.Deserialize(file);
                 file.Close();
 
-               
-                index = save.index;
+
+            GameManager.scriptName = save.scriptName;
+            index = save.index;
                 switch (save.type)
                 {
-                    case 0:
-                    currentLogInTitle = new ScriptData(save.type, save.backpic);
-                        break;
                     case 1:
                     currentLogInTitle = new ScriptData(save.type, save.name, save.log, save.picname, save.backpic);
-                        break;
-                    case 2:
-                    currentLogInTitle = new ScriptData(save.type, save.name, save.log, save.picname);
                         break;
                     case 3:
                     currentLogInTitle = new ScriptData(save.type, save.option1, save.option2, save.JumpTo1,
@@ -74,18 +69,15 @@ public class loadAndSaveInTitle : MonoBehaviour
                     case 4:
                     currentLogInTitle = new ScriptData(save.type, save.name, save.log, save.picname);
                         break;
-                    case 5:
-                    currentLogInTitle = new ScriptData(save.type, save.backpic);
-                        break;
                 }
 
 
-                Debug.Log("Game Loaded, index is " + index);
+                Debug.Log("Game Loaded, index is " + index + " , scriptName is " + save.scriptName);
                 JumpFromTitle = 1;
                 SceneManager.LoadScene(1);
 
 
-            }
+        }
             else
             {
                 Debug.Log("No game saved!");
@@ -93,13 +85,4 @@ public class loadAndSaveInTitle : MonoBehaviour
     }
 
 
-    public void setImage(Image image, string picName)
-    {
-        image.sprite = Resources.Load("picture/demo/" + picName, typeof(Sprite)) as Sprite;
-    }//设置角色图片和背景图片的函数
-
-    public void setText(Text text, string content)
-    {
-        text.text = content;
-    }
 }
