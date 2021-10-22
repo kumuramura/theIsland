@@ -14,6 +14,7 @@ public class titlebutton : MonoBehaviour
     public CanvasGroup files;
 
     public Image Fullcg;
+
   
     
     private bool filesIsOpen = false;
@@ -35,6 +36,7 @@ public class titlebutton : MonoBehaviour
     //进入游戏
     public void startGame()
     {
+
         SceneManager.LoadScene(1);
         
     }

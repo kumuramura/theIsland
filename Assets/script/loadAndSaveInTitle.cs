@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class loadAndSaveInTitle : MonoBehaviour
 {
 
-    public static int index =0;
+    public int index =0;
     public static ScriptData currentLogInTitle;
     public static int JumpFromTitle = 0;
      void Start()
@@ -56,7 +56,7 @@ public class loadAndSaveInTitle : MonoBehaviour
 
 
             GameManager.scriptName = save.scriptName;
-            index = save.index;
+            LoadScript.index = save.index;
                 switch (save.type)
                 {
                     case 1:
@@ -72,7 +72,7 @@ public class loadAndSaveInTitle : MonoBehaviour
                 }
 
 
-                Debug.Log("Game Loaded, index is " + index + " , scriptName is " + save.scriptName);
+                Debug.Log("Game Loaded, index is " + LoadScript.index + " , scriptName is " + save.scriptName);
                 JumpFromTitle = 1;
                 SceneManager.LoadScene(1);
 

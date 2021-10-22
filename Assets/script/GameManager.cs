@@ -9,12 +9,10 @@ public class GameManager : MonoBehaviour
     public Text talk;
     public Image background;
     public Image character;
+    public Image character2;//用于动态切换
     public Text choose1;
     public Text choose2;
 
-
-    public CanvasGroup TalkingLogs;
-    public CanvasGroup characterPic;
     public CanvasGroup xuan1;//选项的canvas
 
     public static int choosen = 0;//用来选择的
@@ -31,14 +29,23 @@ public class GameManager : MonoBehaviour
     float speed;    //计时，跳转时置为0
     private string logPrint = null;//接收data.log的内容
     int use = 1;//决定文字是否逐个显示，用来改变显示选项的时候
-    //
+                //
 
+    //下面为图片动态切换数值
+    int frontback = 1;
+    string oldCharater="空";//上一个角色图片的名字
+    //该功能成功转移到了ImageTransition
+    //
 
     void Start()
     {
-        GameManager.scriptName = "0chapter";
-        LoadScript.instance.loadscripts(GameManager.scriptName);
-        handleData(LoadScript.instance.loadNext());
+        
+
+            LoadScript.instance.loadscripts(GameManager.scriptName);
+            handleData(LoadScript.instance.loadNext());
+ 
+        
+        
         for (int i = 1; i <= 30; i++)
         {
             if (File.Exists("./data"
@@ -135,6 +142,8 @@ public class GameManager : MonoBehaviour
             textPrint(talk, logPrint);//开始逐个显示
         else if (use == 0)
             setText(talk,logPrint);
+
+        
     }
 
     
@@ -145,12 +154,30 @@ public class GameManager : MonoBehaviour
             return;
         if(data.type == 1)
         {
-            Visiable.setVisible(TalkingLogs);
-            Visiable.setVisible(characterPic);
+
             Visiable.setInvisible(xuan1);
-          
+            if(oldCharater!= data.picname)
+            {
+                frontback = -frontback;
+                oldCharater = data.picname;
+                print("不是一张图");
+            }
+
             setImage(background, "background/" + data.backpic);//设置背景
-            setImage(character, "fImage/" + data.picname);//设置人物立绘
+            if(frontback==1)//前景图生效
+            {
+                setImage(character, "fImage/" + data.picname);//设置人物立绘
+                ImageTransition.alpha1 = 1f;
+                ImageTransition.alpha2 = 0f;
+                
+            }
+            if(frontback == -1)//后景图生效
+            {
+                setImage(character2, "fImage/" + data.picname);//设置人物立绘
+                ImageTransition.alpha1 = 0f;
+                ImageTransition.alpha2 = 1f;
+            }
+            
             setText(names, data.name);
             //setText(talk, data.log);
             logPrint = data.log;//把log的内容传出去
@@ -159,8 +186,7 @@ public class GameManager : MonoBehaviour
         }
         else if (data.type == 4)
         {
-            Visiable.setVisible(TalkingLogs);
-            Visiable.setVisible(characterPic);
+
             Visiable.setInvisible(xuan1);          
             setImage(character, "fImage/" + data.picname);
             setText(names, data.name);
@@ -178,8 +204,8 @@ public class GameManager : MonoBehaviour
             setText(names, data.name);
             setText(talk, data.log);
             Visiable.setVisible(xuan1);
-            RecordLog.historyLog.Add(data.option1);
-            RecordLog.historyLog.Add(data.option2);
+            RecordLog.historyLog.Add("选项1:"+data.option1);
+            RecordLog.historyLog.Add("选项2:" + data.option2);
             use = 0;
         }
        

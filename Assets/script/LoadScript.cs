@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class LoadScript : MonoBehaviour{
     public static LoadScript instance;
     public Text speakingName;//改变名字颜色
-    int index;
+    public static int index=0;
     bool SaveCheck = false;
     List<string> txt;//定义一个txt的list
     string[] datas;
@@ -21,15 +21,18 @@ public class LoadScript : MonoBehaviour{
      void Awake()
     {
         instance = this;
-        index = 0;
-
+       
         string path = "./data";
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
         }
 
+    }
 
+    void Update()
+    {
+        //print(index);
     }
 
     //加载txt文件中的剧本，根据换行符号进行分出一个个数据
@@ -44,7 +47,6 @@ public class LoadScript : MonoBehaviour{
             txt.Add(datas[i]);
         }
 
-        index = 0;
     }//加载txt文件
 
     public ScriptData loadNext()
@@ -71,10 +73,11 @@ public class LoadScript : MonoBehaviour{
             {
                 loadAndSaveInTitle.JumpFromTitle = 0;
                 currentLog = loadAndSaveInTitle.currentLogInTitle;
-                index = loadAndSaveInTitle.index;
+                //index = loadAndSaveInTitle.index;
                 ChangeNameColor(currentLog.name);
                 //把聊天记录的内容删掉
                 RecordLog.historyLog.Clear();
+                RecordLog.historyLog.Add("0");
                 //开始把存档中的save展示出来
                 LoadScript.instance.loadscripts(GameManager.scriptName);
                 
@@ -319,6 +322,7 @@ public class LoadScript : MonoBehaviour{
                 SaveCheck = true;
                 //把聊天记录的内容删掉
                 RecordLog.historyLog.Clear();
+                RecordLog.historyLog.Add("0");
                 //开始把存档中的save展示出来
                 LoadScript.instance.loadscripts(save.scriptName);
                 GameManager.scriptName = save.scriptName;
