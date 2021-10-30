@@ -39,21 +39,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
-
-            LoadScript.instance.loadscripts(GameManager.scriptName);
+       
+            LoadScript.instance.loadscripts(scriptName);
             handleData(LoadScript.instance.loadNext());
- 
-        
-        
+              
         for (int i = 1; i <= 30; i++)
         {
-            if (File.Exists("./data"
-                + "/gamesave" + i + ".save"))
+            if (File.Exists("./SaveData"
+                + "/gamesave" + i + ".sav"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open("./data"
-                + "/gamesave" + i + ".save", FileMode.Open);
+                FileStream file = File.Open("./SaveData"
+                + "/gamesave" + i + ".sav", FileMode.Open);
                 Save save = (Save)bf.Deserialize(file);
                 file.Close();
 
@@ -150,8 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void handleData(ScriptData data)
     {
-        if (data == null)
-            return;
+
         if(data.type == 1)
         {
 
@@ -184,17 +180,7 @@ public class GameManager : MonoBehaviour
             use = 1;
             RecordLog.historyLog.Add(data.name+":"+ data.log);
         }
-        else if (data.type == 4)
-        {
-
-            Visiable.setInvisible(xuan1);          
-            setImage(character, "fImage/" + data.picname);
-            setText(names, data.name);
-            //setText(talk, data.log);
-            logPrint = data.log;//把log的内容传出去
-            use = 1;
-            RecordLog.historyLog.Add(data.name + ":" + data.log);
-        }
+        
         else if (data.type == 3)
         {
             setText(choose1, data.option1);

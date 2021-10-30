@@ -169,6 +169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u5B58\u6863\u8BF4\u660E5"
       objectReference: {fileID: 0}
+    - target: {fileID: 4791008215336641719, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4791008215668819880, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1485,6 +1490,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u5B58\u6863\u8BF4\u660E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791008215336641719, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4791008215668819880, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
         type: 3}
@@ -3339,6 +3349,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u5B58\u6863\u8BF4\u660E6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791008215336641719, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4791008215668819880, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
         type: 3}
@@ -6581,6 +6596,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -72
       objectReference: {fileID: 0}
+    - target: {fileID: 4791008215336641719, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4791008215668819880, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7343,6 +7363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u5B58\u6863\u8BF4\u660E2"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791008215336641719, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4791008215668819880, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
         type: 3}
@@ -10179,6 +10204,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u5B58\u6863\u8BF4\u660E3"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791008215336641719, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4791008215668819880, guid: 0c2521cc87aa2fa47aa688b9df7bc433,
         type: 3}

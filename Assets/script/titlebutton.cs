@@ -13,9 +13,7 @@ public class titlebutton : MonoBehaviour
     public CanvasGroup cg;
     public CanvasGroup files;
 
-    public Image Fullcg;
-
-  
+    public Image Fullcg;  
     
     private bool filesIsOpen = false;
 
@@ -28,9 +26,7 @@ public class titlebutton : MonoBehaviour
                 Visiable.setInvisible(files);
                 filesIsOpen = false;
             }
-        }
-        
-        
+        }               
     }
 
     //进入游戏

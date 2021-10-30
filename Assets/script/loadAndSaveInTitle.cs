@@ -18,8 +18,8 @@ public class loadAndSaveInTitle : MonoBehaviour
                 + "/gamesave" + i + ".save"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open("./data"
-                + "/gamesave" + i + ".save", FileMode.Open);
+                FileStream file = File.Open("./SaveData"
+                + "/gamesave" + i + ".sav", FileMode.Open);
                 Save save = (Save)bf.Deserialize(file);
                 file.Close();
 
@@ -34,23 +34,19 @@ public class loadAndSaveInTitle : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        //LoadGame();
-    }
 
     public void LoadGame()
     {
         
         
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-            if (File.Exists("./data"
-                + "/gamesave" + button.name + ".save"))
+            if (File.Exists("./SaveData"
+                + "/gamesave" + button.name + ".sav"))
             {
 
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open("./data"
-                + "/gamesave" + button.name + ".save", FileMode.Open);
+                FileStream file = File.Open("./SaveData"
+                + "/gamesave" + button.name + ".sav", FileMode.Open);
                 Save save = (Save)bf.Deserialize(file);
                 file.Close();
 
@@ -60,14 +56,11 @@ public class loadAndSaveInTitle : MonoBehaviour
                 switch (save.type)
                 {
                     case 1:
-                    currentLogInTitle = new ScriptData(save.type, save.name, save.log, save.picname, save.backpic);
+                    currentLogInTitle = new ScriptData1_NormalTalk(save.type, save.name, save.log, save.picname, save.backpic);
                         break;
                     case 3:
-                    currentLogInTitle = new ScriptData(save.type, save.option1, save.option2, save.JumpTo1,
+                    currentLogInTitle = new ScriptData3_Choose(save.type, save.option1, save.option2, save.JumpTo1,
                             save.JumpTo2, save.name, save.log, save.picname, save.backpic);
-                        break;
-                    case 4:
-                    currentLogInTitle = new ScriptData(save.type, save.name, save.log, save.picname);
                         break;
                 }
 

@@ -28,7 +28,7 @@ public class RecordLog : MonoBehaviour
 
     void Update()
     {
-        //print(RecordLog.historyLog.Count);
+
         
         while(historyLog.Count>=12)
         {
@@ -37,15 +37,16 @@ public class RecordLog : MonoBehaviour
 
         for(int i=1;i<=11;i++)
         {
+
             theLog = GameObject.Find("r" + i);
             theName = GameObject.Find("name" + i);
-            Visiable.setVisible(theLog.GetComponent<CanvasGroup>());         
-                string[] datas = historyLog[i].Split(':');//用:分开，0为名字，1为对话
-                theName.GetComponent<Text>().text = null;
-                theLog.GetComponent<Text>().text = null;
-                theName.GetComponent<Text>().text = datas[0];
-                theLog.GetComponent<Text>().text = datas[1];
+            Visiable.setVisible(theLog.GetComponent<CanvasGroup>());    
             
+            string[] datas = historyLog[i].Split(':');//用:分开，0为名字，1为对话
+
+            theName.GetComponent<Text>().text = datas[0];
+            theLog.GetComponent<Text>().text = datas[1];
+
         }
         
         
